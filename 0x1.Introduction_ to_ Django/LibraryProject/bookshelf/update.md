@@ -3,7 +3,7 @@
 
 python manage.py shell
 
-book = Book.objects.filter(title="1984", author="George Orwell")
+book = Book.objects.get(title="1984", author="George Orwell")
 
 book.title = 'Nineteen Eighty-Four'
 
