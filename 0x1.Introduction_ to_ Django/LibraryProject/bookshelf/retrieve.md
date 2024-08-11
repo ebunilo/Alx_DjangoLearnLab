@@ -1,6 +1,8 @@
 # Retrieve Book
 ### Retrieve and display all attributes of the book created previously.
- 
+
+python manage.py shell
+
 Book.objects.filter(title="1984", author="George Orwell")
 
-"""<QuerySet [<Book:  Title: 1984, Author: George Orwell, Publication Date: 1949>]>"""
+""" <QuerySet [<Book:  Title: 1984, Author: George Orwell, Publication Date: 1949>]> """

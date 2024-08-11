@@ -1,10 +1,14 @@
 # Update Book
 ### Update the book title to "Nineteen Eighty-Four and save the changes"
 
-new_book.title = 'Nineteen Eighty-Four'
+python manage.py shell
 
-new_book.save()
+book = Book.objects.filter(title="1984", author="George Orwell")
+
+book.title = 'Nineteen Eighty-Four'
+
+book.save()
 
 Book.objects.all()
 
-"""<QuerySet [<Book:  Title: Nineteen Eighty-Four, Author: George Orwell, Publication Date: 1949>]>"""
+""" <QuerySet [<Book:  Title: Nineteen Eighty-Four, Author: George Orwell, Publication Date: 1949>]> """
