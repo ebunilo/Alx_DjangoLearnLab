@@ -42,10 +42,10 @@ class UserProfile(models.Model):
         ('Member', 'Member'),
     ]
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='Member')
+    role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='Librarian')
 
     def __str__(self):
-        return f"{self.user.name} - {self.role}"
+        return f"{self.user.username} - {self.role}"
 
     # Automatically create UserProfile when user is created
     @receiver(post_save, sender=User)
