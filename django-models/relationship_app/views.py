@@ -66,7 +66,7 @@ def member_view(request):
 
 
 # Add Book View
-@permission_required('books.can_add_book', raise_exception=True)
+@permission_required('relationship_app.can_add_book', raise_exception=True)
 def add_book(request):
     if request.method == 'POST':
         form = BookForm(request.POST)
@@ -79,7 +79,7 @@ def add_book(request):
 
 
 # Edit Book View
-@permission_required('books.can_change_book', raise_exception=True)
+@permission_required('relationship_app.can_change_book', raise_exception=True)
 def edit_book(request, pk):
     book = get_object_or_404(Book, pk=pk)
     if request.method == 'POST':
@@ -93,7 +93,7 @@ def edit_book(request, pk):
 
 
 # Delete Book View
-@permission_required('books.can_delete_book', raise_exception=True)
+@permission_required('relationship_app.can_delete_book', raise_exception=True)
 def delete_book(request, pk):
     book = get_object_or_404(Book, pk=pk)
     if request.method == 'POST':
