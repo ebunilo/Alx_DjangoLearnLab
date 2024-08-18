@@ -25,11 +25,11 @@ class LibraryDetailView(DetailView):
 
 
 # User Login View (built-in)
-class UserLoginView(LoginView):
+class LoginView(LoginView):
     template_name = 'relationship_app/login.html'
 
 # User logout View (built-in)
-class UserLogoutView(LogoutView):
+class LogoutView(LogoutView):
     template_name = 'relationship_app/login.html'
 
 
