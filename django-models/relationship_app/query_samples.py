@@ -23,6 +23,7 @@ library_name.books.all()
 # Retrieve the library by name
 library_name = Library.objects.get(name="library_name")
 # Get the librarian associated with the library
+Library.objects.get(name="library")
 librarian = Librarian.objects.get(library="library_name")
 print(library_name)
 
@@ -30,6 +31,7 @@ print(library_name)
 # Add book to a library
 # Retrieve the library and book
 library = Library.objects.get(name="library_name")
+Book.objects.get(title="book_title")
 book = Book.objects.get(title="book_title")
 # Add the book to the library
 library.books.add(book)
