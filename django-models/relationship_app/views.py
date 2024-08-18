@@ -10,7 +10,8 @@ from django.contrib.auth import login
 from django.http import HttpResponseForbidden
 from .forms import BookForm
 
-from .models import Book, Library
+from .models import Book
+from .models import Library
 
 # Create your views here.
 def list_books(request):
