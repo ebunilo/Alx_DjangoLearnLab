@@ -11,8 +11,8 @@ Book.objects.filter(author=author)
 
 # List all books in a library.
 # Retrieve the library by name
-[Library.objects.get(name="library_name")]
 library_name = Library.objects.get(name="library_name")
+Library.objects.get(name=library_name)
 # Get all books in the library
 Book.objects.filter(library=library_name)
 # Or
@@ -23,8 +23,7 @@ library_name.books.all()
 # Retrieve the library by name
 library_name = Library.objects.get(name="library_name")
 # Get the librarian associated with the library
-Library.objects.get(name="library")
-librarian = Librarian.objects.get(library="library_name")
+librarian = Librarian.objects.get(library=library_name)
 print(library_name)
 
 
