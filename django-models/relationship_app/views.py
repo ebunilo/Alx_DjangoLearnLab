@@ -6,6 +6,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.views.generic.edit import CreateView
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.decorators import permission_required
+from django.contrib.auth import login
 from django.http import HttpResponseForbidden
 from .forms import BookForm
 
@@ -19,21 +20,21 @@ def list_books(request):
 
 class LibraryDetailView(DetailView):
     model = Library
-    template_name = 'library_detail.html'
+    template_name = 'relationship_app/library_detail.html'
 
 
 # User Login View (built-in)
 class UserLoginView(LoginView):
-    template_name = 'login.html'
+    template_name = 'relationship_app/login.html'
 
 # User logout View (built-in)
 class UserLogoutView(LogoutView):
-    template_name = 'login.html'
+    template_name = 'relationship_app/login.html'
 
 
 class UserRegisterView(CreateView):
     form_class = UserCreationForm
-    template_name = 'register.html'
+    template_name = 'relationship_app/register.html'
     success_url = reverse_lazy('login')
 
 
@@ -50,19 +51,19 @@ def is_member(user):
 # Admin View
 @user_passes_test(is_admin)
 def admin_view(request):
-    return render(request, 'admin_view.html')
+    return render(request, 'relationship_app/admin_view.html')
 
 
 # Librarian View
 @user_passes_test(is_librarian)
 def librarian_view(request):
-    return render(request, 'librarian_view.html')
+    return render(request, 'relationship_app/librarian_view.html')
 
 
 # Member View
 @user_passes_test(is_member)
 def member_view(request):
-    return render(request,'member_view.html')
+    return render(request,'relationship_app/member_view.html')
 
 
 # Add Book View
@@ -75,7 +76,7 @@ def add_book(request):
             return redirect('list_books')
     else:
         form = BookForm()
-    return render(request, 'add_book.html', {'form': form})
+    return render(request, 'relationship_app/add_book.html', {'form': form})
 
 
 # Edit Book View
@@ -86,10 +87,10 @@ def edit_book(request, pk):
         form = BookForm(request.POST, instance=book)
         if form.is_valid():
             form.save()
-            return redirect('book_detail', pk=book.id)
+            return redirect('relationshhip_app/book_detail', pk=book.id)
     else:
         form = BookForm(instance=book)
-    return render(request, 'edit_book.html', {'form': form, 'book': book})
+    return render(request, 'relationship_app/edit_book.html', {'form': form, 'book': book})
 
 
 # Delete Book View
@@ -99,4 +100,4 @@ def delete_book(request, pk):
     if request.method == 'POST':
         book.delete()
         return redirect('list_books')
-    return render(request, 'delete_book.html', {'book': book})
+    return render(request, 'relationship_app/delete_book.html', {'book': book})
