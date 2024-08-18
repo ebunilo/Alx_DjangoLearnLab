@@ -20,21 +20,21 @@ def list_books(request):
 
 class LibraryDetailView(DetailView):
     model = Library
-    template_name = 'library_detail.html'
+    template_name = 'relationship_app/library_detail.html'
 
 
 # User Login View (built-in)
 class UserLoginView(LoginView):
-    template_name = 'login.html'
+    template_name = 'relationship_app/login.html'
 
 # User logout View (built-in)
 class UserLogoutView(LogoutView):
-    template_name = 'login.html'
+    template_name = 'relationship_app/login.html'
 
 
 class UserRegisterView(CreateView):
     form_class = UserCreationForm
-    template_name = 'register.html'
+    template_name = 'relationship_app/register.html'
     success_url = reverse_lazy('login')
 
 
