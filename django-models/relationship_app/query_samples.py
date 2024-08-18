@@ -11,7 +11,7 @@ Book.objects.filter(author=author)
 
 # List all books in a library.
 # Retrieve the library by name
-Library.objects.get(name="library_name")
+[Library.objects.get(name="library_name")]
 library_name = Library.objects.get(name="library_name")
 # Get all books in the library
 Book.objects.filter(library=library_name)
