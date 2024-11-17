@@ -4,7 +4,7 @@ from .models import Book, CustomUser
 
 
 # Register your models here.
-class BookAdmin(UserAdmin):
+class BookAdmin(admin.ModelAdmin):
     list_display = ('title', 'author', 'publication_year')
     search_fields = ('title', 'author')
     list_filter = ('author', 'publication_year')

@@ -9,6 +9,14 @@ class Book(models.Model):
 
     def __str__(self):
         return f" Title: {self.title}, Author: {self.author}, Publication Date: {self.publication_year}"
+    
+    class Meta:
+        permissions = [
+            ('can_view', 'Can View'),
+            ('can_create', 'Can Create'),
+            ('can_edit', 'Can Edit'),
+            ('can_delete', 'Can Delete'),
+        ]
 
 
 # Custom user manager
