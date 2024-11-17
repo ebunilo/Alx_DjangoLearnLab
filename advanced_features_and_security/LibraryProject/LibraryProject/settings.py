@@ -37,8 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'bookshelf',
-    'relationship_app',
+    'bookshelf.app.BookshelfConfig',
+    'relationship_app.app.Relationship_appConfig',
 ]
 
 MIDDLEWARE = [
@@ -53,7 +53,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'LibraryProject.urls'
 
-AUTH_USER_MODEL = 'advanced_features_and_security.CustomUser'
+AUTH_USER_MODEL = 'bookshelf.CustomUser'
 
 TEMPLATES = [
     {
