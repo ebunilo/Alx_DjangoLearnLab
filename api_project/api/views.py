@@ -1,4 +1,4 @@
-from rest_framework.generics import ListAPIView
+from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework import viewsets
 
@@ -8,7 +8,7 @@ from .serializers import BookSerializer
 # Create your views here.
 
 
-class BookList(ListAPIView):
+class BookList(generics.ListAPIView):
     """Uses serializer to retrieve and return book data"""
     queryset = Book.objects.all()
     serializer_class = BookSerializer
