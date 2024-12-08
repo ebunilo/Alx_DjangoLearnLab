@@ -35,4 +35,7 @@ Update settings.py to use PosgreSQL database.
 - CREATE DATABASE blog;
 
 
+## addons
+- pip install django-taggit (for Post tagging)
+- pip install Pillow (for picture management)
 

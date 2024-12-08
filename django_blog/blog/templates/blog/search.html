@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+                <!-- Post tags -->
+        {% if post_list %}
+            <div class="tags mt-3">
+                <strong>Searched Items:</strong>
+                <ul class="list-inline">
+                    {% for post in post_list %}
+                        <li class="mb-4 border-bottom pb-3">
+                        <a href="{{ post.get_absolute_url }}" class="text-decoration-none text-dark">
+                        <h3>{{ post }}</h3>
+                    </a>
+                    {% endfor %}
+                </ul>
+        {% else %}
+            <p class="text-muted">No articles match your search.</p>
+            </div>
+        {% endif %}
+    </div>
+
+
+{% endblock content %}

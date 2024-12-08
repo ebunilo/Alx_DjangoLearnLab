@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+                 <!-- Post by tags -->
+        {% if posts %}
+            <div class="tags mt-3">
+                <strong>{{tag_name}} posts</strong>
+                <ul class="list-inline">
+                    {% for post in posts %}
+                        <li class="mb-4 border-bottom pb-3">
+                        <a href="{{ post.get_absolute_url }}" class="text-decoration-none text-dark">
+                        <h3>{{ post.title }}</h3>
+                    </a>
+                    {% endfor %}
+                </ul>
+        {% else %}
+            <p class="text-muted">No articles under this tag</p>
+            </div>
+        {% endif %}   
+{% endblock content %}
