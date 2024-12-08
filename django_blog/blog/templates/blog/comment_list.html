@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="mb-4">Comments</h1>
+    {% if comment_list %}
+        <ul class="list-unstyled">
+            {% for comment in comment_list %}
+                <li class="mb-3">
+                    <div>
+                        <a href="{{ comment.post.get_absolute_url }}" class="text-decoration-none text-dark">
+                            Comment on: {{ comment.post.title }} by {{ comment.author.username }}
+                        </a>
+                        {% if user.is_authenticated and comment.author == user %}
+                            <!-- Display edit and delete options for the comment owner -->
+                            <div class="mt-2">
+                                <a href="{% url 'comment-update' comment.id %}" class="btn btn-sm btn-warning">Edit</a>
+                                <a href="{% url 'comment-delete' comment.id %}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this comment?')">Delete</a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="text-muted">There are no comments yet.</p>
+    {% endif %}
+</div>
+{% endblock content %}

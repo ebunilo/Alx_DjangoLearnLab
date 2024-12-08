@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <TITle>Post Update</TITle>
+  <h1>Edit Post: {{ post.title }}</h1>
+  <form method="post">
+    {% csrf_token %}
+    <div>
+      <label for="title">Title</label>
+      {{ form.title }}
+    </div>
+    <div>
+      <label for="content">Content</label>
+      {{ form.content }}
+    </div>
+    <button type="submit">Update Post</button>
+  </form>
+  <a href="{% url 'post-detail' post.id %}">Cancel</a>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="post-details mb-4">
+        <h3>Editing Comment for Post:</h3>
+        <h4><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h4>
+        <p>Author: {{ post.author }}</p>
+        <p>Published: {{ post.published_date|date:"F j, Y" }}</p>
+    </div>
+    <div class="form-container bg-white p-4 border rounded shadow-sm">
+        <h2 class="mb-4">Update Post Comment</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="mt-4">
+                <input type="submit" value="Update" class="btn btn-primary w-100">
+            </div>
+        </form>
+    </div>
+
+    <!-- Link to view comments by the same user -->
+    {% if user.is_authenticated and post.author == user %}
+        <div class="mt-4">
+            <a href="{% url 'comment-list' %}" class="btn btn-info">View All Comments</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock content %}

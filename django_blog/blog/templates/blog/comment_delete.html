@@ -1,0 +1,23 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="alert alert-warning text-center mb-4">
+        <h2 class="mb-3">You are about to delete this comment: "{{ comment.content }}"</h2>
+        <p>Are you sure you want to proceed? This action cannot be undone.</p>
+        <!-- Display post details -->
+        <div>
+            <p>This comment belongs to the post: <a href="{{ post.get_absolute_url }}">{{ post.title }}</a></p>
+            <p>Author: {{ post.author }}</p>
+            <p>Published Date: {{ post.published_date|date }}</p>
+        </div>
+    </div>
+    <form method="post" class="bg-white p-4 border rounded shadow-sm">
+        {% csrf_token %}
+        {{ form.as_p}}
+        <div class="form-group mt-3">
+            <input type="submit" value="Confirm" class="btn btn-danger w-100">
+        </div>
+    </form>
+</div>
+{% endblock content %}
