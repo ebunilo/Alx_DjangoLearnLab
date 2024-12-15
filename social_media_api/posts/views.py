@@ -45,3 +45,12 @@ from rest_framework import generics
 class LikePostsView(generics.ListCreateAPIView):
     model = Like
     queryset = Like.objects.all()
+    
+    def likepost(self, request, pk=None):
+        if request.method == 'POST':
+            post = generics.get_object_or_404(Post, pk=pk)
+            like = Like.objects.get_or_create(user=request.user, post=post)
+            Notification.objects.create(like)
+
+        else:
+            pass
