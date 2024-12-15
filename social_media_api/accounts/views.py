@@ -1,5 +1,5 @@
 from rest_framework import viewsets
-from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
+from rest_framework import permissions, generics
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.response import Response
@@ -20,7 +20,7 @@ class ProfileViewSet(viewsets.ModelViewSet):
     """Profile ViewSet"""
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
 
 class RegisterView(APIView):
     def post(self, request):
@@ -35,3 +35,9 @@ class CustomLoginView(ObtainAuthToken):
         response = super().post(request, *args, **kwargs)
         token = Token.objects.get(key=response.data['token'])
         return Response({"token": token.key, "user_id": token.user_id})
+
+#! Ignore 
+from accounts.models import CustomUser
+from rest_framework.response import Response
+class UnFollowUsers(generics.GenericAPIView):
+    queryset = CustomUser.objects.all()
