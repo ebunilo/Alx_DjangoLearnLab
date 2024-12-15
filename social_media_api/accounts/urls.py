@@ -11,7 +11,7 @@ router.register(r'profiles', ProfileViewSet, basename='profile')
 urlpatterns = [
     path('', include(router.urls)),
     path('token/', obtain_auth_token),
-    path('api/register/', RegisterView.as_view(), name='register'),
-    path('api/login/', CustomLoginView.as_view(), name='login'),
+    path('register/', RegisterView.as_view(), name='register'),
+    path('login/', CustomLoginView.as_view(), name='login'),
 ]
 
