@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-@b3%41_tfoyzxmx_r7wq^nub+7d_!=mfx0iw(utmo#m)*qcy*^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -81,7 +81,14 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    },
+    'mysql': {
+        'ENGINE': 'django.db.backends.mysql',  
+        'NAME': 'mysql',
+        'USER': 'mysql',                 
+        'PASSWORD': 'secure_password',         
+        'PORT': '3306',             
+        'HOST': 'localhost',
 }
 
 
@@ -139,3 +146,14 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ]
 }
+
+
+SECURE_SSL_REDIRECT = True
+
+SESSION_COOKIE_SECURE = True
+
+CSRF_COOKIE_SECURE = True
+
+SECURE_BROWSER_XSS_FILTER = True
+
+X_FRAME_OPTIONS = 'ALLOW-FROM https://example.com/'
