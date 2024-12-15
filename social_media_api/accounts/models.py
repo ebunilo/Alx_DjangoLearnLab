@@ -1,3 +1,6 @@
+from rest_framework.response import Response
+from rest_framework.decorators import action
+
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 
@@ -29,11 +32,24 @@ class CustomUser(AbstractUser):
     """Custom user"""
     email = models.EmailField(unique=True, max_length=255)
     username = models.CharField(unique=False, max_length=20)
-
+    following = models.ManyToManyField("self", symmetrical=False, related_name="followers")
+    
     objects = CustomUserManager()
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
+    
+    @action(detail=True, methods=['post'])
+    def follow_user(self, request, pk=None):
+        user_to_follow = self.get_object()
+        request.user.following.add(user_to_follow)
+        return Response({"status": "following"})
+
+    @action(detail=True, methods=['post'])
+    def unfollow_user(self, request, pk=None):
+        user_to_unfollow = self.get_object()
+        request.user.following.remove(user_to_unfollow)
+        return Response({"status": "unfollowed"})
 
 
 class Profile(models.Model):
@@ -42,7 +58,6 @@ class Profile(models.Model):
     bio = models.TextField(blank=True, null=True)
     phone = models.CharField(max_length=20, blank=True, null=True)
     picture = models.ImageField(upload_to='profile_pictures/', blank=True, null=True)
-    followers = models.ManyToManyField(CustomUser, related_name='following', blank=True)
-
+    
     def __str__(self):
         return self.user.username
