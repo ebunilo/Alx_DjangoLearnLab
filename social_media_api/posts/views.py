@@ -1,4 +1,7 @@
 from rest_framework import viewsets, permissions
+from django_filters import rest_framework as r_filters
+from rest_framework import filters
+from rest_framework.pagination import PageNumberPagination
 from django.shortcuts import render
 
 from .serializers import PostSerializer, CommentSerializer
@@ -10,6 +13,11 @@ class PostViewSet(viewsets.ModelViewSet):
     serializer_class = PostSerializer
     permission_classes = [permissions.IsAuthenticated]
 
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter, r_filters.DjangoFilterBackend]
+    search_fields = ['author__username', 'title', 'content']
+    ordering_fields = ['title']
+    filterset_fields = ['created_at']
+    
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
 
@@ -21,3 +29,19 @@ class CommentViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
+
+#! Ignore
+from django.contrib.auth import get_user_model
+from django.shortcuts import get_object_or_404
+class FeedView(viewsets.ModelViewSet):
+    following = get_object_or_404(get_user_model(), pk=1).follows
+    following_users = following.all()
+    queryset = Post.objects.filter(author__in=following_users).order_by('-created_at')
+
+from notifications.models import Notification
+from posts.models import Like
+from rest_framework import generics
+class LikePostsView(generics.ListCreateAPIView):
+    model = Like
+    queryset = Like.objects.all()
