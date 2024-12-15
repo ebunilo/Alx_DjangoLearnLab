@@ -128,6 +128,14 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+STATICFILES_DIR = [
+    BASE_DIR / 'static'
+]
+
+STATIC_ROOT = [
+    config('staticfiles')
+]
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
