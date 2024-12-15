@@ -13,5 +13,7 @@ urlpatterns = [
     path('token/', obtain_auth_token),
     path('register/', RegisterView.as_view(), name='register'),
     path('login/', CustomLoginView.as_view(), name='login'),
+    path('follow/<int:user_id>/', FollowUsers.as_view() ),
+    path('unfollow/<int:user_id>/', UnFollowUsers.as_view()),
 ]
 
